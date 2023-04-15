@@ -1,0 +1,74 @@
+######################################################################################
+#
+# Auther : Isaac D
+# Assistance with : chatgpt
+# Date : 15/04/2023
+# Purpose : timer for sample payment with s3 pre-signed url
+#
+# VERSION : v2
+# Bugfixed : changed timer to countdown
+#
+#######################################################################################
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Countdown Timer</title>
+  <style>
+    /* CSS for countdown timer */
+    .countdown-container {
+      text-align: center;
+    }
+
+    .countdown {
+      display: inline-block;
+      font-size: 48px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    /* CSS for responsive design */
+    @media screen and (max-width: 480px) {
+      .countdown {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown-container">
+    <div class="countdown" id="countdown-timer">2:00</div>
+  </div>
+
+  <script>
+    // JavaScript for countdown timer
+    function startCountdown(duration, display) {
+      var timer = duration, minutes, seconds;
+      setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          timer = duration;
+        }
+      }, 1000);
+    }
+
+    window.onload = function () {
+      var twoMinutes = 2 * 60,
+        display = document.getElementById("countdown-timer");
+      startCountdown(twoMinutes, display);
+    };
+  </script>
+</body>
+</html>
