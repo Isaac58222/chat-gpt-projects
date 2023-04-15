@@ -1,0 +1,95 @@
+######################################################################################
+#
+# Auther : Isaac D
+# Assistance with : chatgpt
+# Date : 15/04/2023
+# Purpose : timer for sample payment with s3 pre-signed url
+#
+# VERSION : v3
+# Bug fixed : Timer restart automatically after reaching zero
+# bug found : stop button
+# feature added : popup notification "Payment has expired."
+#
+#######################################################################################
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment Countdown Timer</title>
+  <style>
+    /* CSS for countdown timer */
+    .countdown-container {
+      text-align: center;
+    }
+
+    .countdown {
+      display: inline-block;
+      font-size: 48px;
+      font-weight: bold;
+      color: #000;
+      margin-bottom: 20px;
+    }
+
+    /* CSS for countdown stop effect */
+    .countdown-stop {
+      animation: countdownStop 0.5s ease-in-out;
+    }
+
+    /* Animation keyframes for countdown stop effect */
+    @keyframes countdownStop {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown-container">
+    <div class="countdown" id="countdown-timer">2:00</div>
+    <button onclick="stopCountdown()">Stop</button>
+  </div>
+
+  <script>
+    // JavaScript for countdown timer
+    var countdownInterval;
+
+    function startCountdown(duration, display) {
+      var timer = duration, minutes, seconds;
+      countdownInterval = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          clearInterval(countdownInterval);
+          display.classList.add("countdown-stop");
+          // Perform payment expiration action here
+          alert("Payment has expired.");
+        }
+      }, 1000);
+    }
+
+    function stopCountdown() {
+      clearInterval(countdownInterval);
+      var display = document.getElementById("countdown-timer");
+      display.classList.add("countdown-stop");
+    }
+
+    window.onload = function () {
+      var twoMinutes = 2 * 60,
+        display = document.getElementById("countdown-timer");
+      startCountdown(twoMinutes, display);
+    };
+  </script>
+</body>
+</html>
