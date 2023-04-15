@@ -1,0 +1,98 @@
+######################################################################################
+#
+# Auther : Isaac D
+# Assistance with : chatgpt
+# Date : 15/04/2023
+# Purpose : timer for sample payment with s3 pre-signed url
+#
+# VERSION : v3
+# Bug fixed : stop button removed
+# bug found : timer restart after refresh the page
+# solution : connect with s3 presigned url
+# feature removed : popup notification
+# features added : animation to timer, remainer :"Please complete your payment before the timer expires.",alert of countdowm reached zero :Payment has expired.
+#
+#######################################################################################
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment Expiry Timer</title>
+  <style>
+    /* CSS for countdown timer and additional text */
+    .countdown-container {
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    .countdown {
+      font-size: 48px;
+      font-weight: bold;
+      color: #000;
+      animation: pulse 1s infinite;
+    }
+
+    .expired {
+      font-size: 24px;
+      color: red;
+    }
+
+    /* CSS for additional text */
+    .additional-text {
+      font-size: 24px;
+      color: #666;
+      margin-top: 20px;
+    }
+
+    /* Animation keyframes for countdown timer */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown-container">
+    <div class="countdown" id="countdown-timer">2:00</div>
+    <div class="expired" id="expired-message" style="display: none;">Payment has expired.</div>
+    <div class="additional-text">Please complete your payment before the timer expires.</div>
+  </div>
+
+  <script>
+    // JavaScript for countdown timer
+    var countdownInterval;
+
+    function startCountdown(duration, display) {
+      var timer = duration, minutes, seconds;
+      countdownInterval = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          clearInterval(countdownInterval);
+          display.style.display = "none";
+          document.getElementById("expired-message").style.display = "block";
+        }
+      }, 1000);
+    }
+
+    window.onload = function () {
+      var twoMinutes = 2 * 60,
+        display = document.getElementById("countdown-timer");
+      startCountdown(twoMinutes, display);
+    };
+  </script>
+</body>
+</html>
