@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Timers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .timer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .timer h1 {
+            font-size: 80px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .timer p {
+            font-size: 24px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .timer button {
+            margin-top: 20px;
+            font-size: 24px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .timer button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer" id="timer1">
+        <h1 id="time1">00:00:00</h1>
+        <p>Timer 1</p>
+        <button onclick="startTimer(1)">Start</button>
+        <button onclick="stopTimer(1)">Stop</button>
+        <button onclick="resetTimer(1)">Reset</button>
+    </div>
+    <div class="timer" id="timer2">
+        <h1 id="time2">00:00:00</h1>
+        <p>Timer 2</p>
+        <button onclick="startTimer(2)">Start</button>
+        <button onclick="stopTimer(2)">Stop</button>
+        <button onclick="resetTimer(2)">Reset</button>
+    </div>
+
+    <script>
+        let timers = [
+            { id: 1, time: 0, intervalId: null },
+            { id: 2, time: 0, intervalId: null }
+        ];
+
+        function startTimer(id) {
+            let timer = timers.find(t => t.id === id);
+            if (timer.intervalId === null) {
+                timer.intervalId = setInterval(() => {
+                    timer.time++;
+                    updateTimerDisplay(timer);
+                }, 1000);
+            }
+        }
+
+        function stopTimer(id) {
+            let timer = timers.find(t => t.id === id);
+            if (timer.intervalId !== null) {
+                clearInterval(timer.intervalId);
+                timer.intervalId = null;
+            }
+        }
+
+        function resetTimer(id) {
+            let timer = timers.find(t => t.id === id);
+            timer.time = 0;
+            updateTimerDisplay(timer);
+            stopTimer(id);
+        }
+
+        function updateTimerDisplay(timer) {
+            let hours = Math.floor(timer.time / 3600);
+            let minutes = Math.floor((timer.time % 3600) / 60);
+            let seconds = timer.time % 60;
+            document.getElementById(`time${timer.id}`).textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+        }
+
+        function pad(num) {
+            return String(num).padStart(2, '0');
+        }
+    </script>
+</body>
+</html>

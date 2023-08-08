@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jedsio - Website made for ChatGPT</title>
+  <style>
+    /* CSS styles for your website */
+    /* Modify and add your own styles here */
+
+    /* Example styles for the tech-inspired design */
+    body {
+      background-color: #222;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #fff;
+    }
+
+    nav {
+      background-color: #555;
+      padding: 10px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 10px;
+    }
+
+    nav a:hover {
+      background-color: #888;
+      color: #fff;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    footer {
+      background-color: #333;
+      padding: 10px;
+      text-align: center;
+    }
+
+    footer p {
+      color: #fff;
+      margin: 0;
+    }
+
+    /* Tech-inspired design */
+    section {
+      margin-bottom: 40px;
+    }
+
+    section h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    section p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    /* Search bar styles */
+    .search-bar {
+      position: relative;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .search-bar input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .search-bar button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      background-color: #555;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-bar button:hover {
+      background-color: #888;
+    }
+
+    .search-bar button:focus {
+      outline: none;
+    }
+
+    .search-bar .search-results {
+      display: none;
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+    }
+
+    .search-bar .search-results ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .search-bar .search-results ul li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .search-bar .search-results ul li:last-child {
+      border-bottom: none;
+    }
+
+    .search-bar .search-results ul li a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .search-bar .search-results ul li a:hover {
+      color: #888;
+    }
+
+    /* Add more styles as per your design preferences */
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Header content goes here -->
+    <h1>Jedsio - Website made for ChatGPT</h1>
+    <p>This website is made by Issac with the help of ChatGPT</p>
+  </header>
+
+  <nav>
+    <!-- Navigation menu goes here -->
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Content of your website goes here -->
+    <section>
+      <h2>Welcome to Jedsio</h2>
+      <p>Explore the world of AWS and cloud computing with our informative blog posts and engaging videos.</p>
+    </section>
+
+    <section>
+      <h2>Interactive Components</h2>
+      <!-- Add interactive components here -->
+    </section>
+
+    <section>
+      <h2>Image Gallery</h2>
+      <!-- Add image gallery here -->
+    </section>
+
+    <section>
+      <h2>Animations with Three.js</h2>
+      <div id="animation-container"></div>
+    </section>
+
+    <section>
+      <h2>Contact Us</h2>
+      <!-- Add contact form here -->
+    </section>
+  </main>
+
+  <footer>
+    <!-- Footer content goes here -->
+    <p>&copy; 2023 Jedsio. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+  <script>
+    // JavaScript code for your website
+    // Modify and add your own scripts here
+
+    // Example script for interactive components
+    // Add your own interactive functionality here
+
+    // Example script for image gallery
+    // Add your own image gallery functionality here
+
+    // Example script for Three.js animations
+    const container = document.getElementById('animation-container');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(container.offsetWidth, container.offsetHeight);
+    container.appendChild(renderer.domElement);
+
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    camera.position.z = 5;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Example script for contact form
+    // Add your own contact form functionality here
+
+    // Animation for search bar
+    const searchButton = document.querySelector('.search-bar button');
+    const searchResults = document.querySelector('.search-bar .search-results');
+
+    searchButton.addEventListener('click', () => {
+      searchResults.style.display = 'block';
+    });
+
+    document.addEventListener('click', (event) => {
+      const isClickInside = searchButton.contains(event.target) || searchResults.contains(event.target);
+      if (!isClickInside) {
+        searchResults.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jedsio - Website made for ChatGPT</title>
+  <style>
+    /* CSS styles for your website */
+    /* Modify and add your own styles here */
+
+    /* Example styles for the tech-inspired design */
+    body {
+      background-color: #222;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #fff;
+    }
+
+    nav {
+      background-color: #555;
+      padding: 10px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 10px;
+    }
+
+    nav a:hover {
+      background-color: #888;
+      color: #fff;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    footer {
+      background-color: #333;
+      padding: 10px;
+      text-align: center;
+    }
+
+    footer p {
+      color: #fff;
+      margin: 0;
+    }
+
+    /* Tech-inspired design */
+    section {
+      margin-bottom: 40px;
+    }
+
+    section h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    section p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    /* Search bar styles */
+    .search-bar {
+      position: relative;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .search-bar input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .search-bar button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      background-color: #555;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-bar button:hover {
+      background-color: #888;
+    }
+
+    .search-bar button:focus {
+      outline: none;
+    }
+
+    .search-bar .search-results {
+      display: none;
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+    }
+
+    .search-bar .search-results ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .search-bar .search-results ul li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .search-bar .search-results ul li:last-child {
+      border-bottom: none;
+    }
+
+    .search-bar .search-results ul li a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .search-bar .search-results ul li a:hover {
+      color: #888;
+    }
+
+    /* Add more styles as per your design preferences */
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Header content goes here -->
+    <h1>Jedsio - Website made for ChatGPT</h1>
+    <p>This website is made by Issac with the help of ChatGPT</p>
+  </header>
+
+  <nav>
+    <!-- Navigation menu goes here -->
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Content of your website goes here -->
+    <section>
+      <h2>Welcome to Jedsio</h2>
+      <p>Explore the world of AWS and cloud computing with our informative blog posts and engaging videos.</p>
+    </section>
+
+    <section>
+      <h2>Interactive Components</h2>
+      <!-- Add interactive components here -->
+    </section>
+
+    <section>
+      <h2>Image Gallery</h2>
+      <!-- Add image gallery here -->
+    </section>
+
+    <section>
+      <h2>Animations with Three.js</h2>
+      <div id="animation-container"></div>
+    </section>
+
+    <section>
+      <h2>Contact Us</h2>
+      <!-- Add contact form here -->
+    </section>
+  </main>
+
+  <footer>
+    <!-- Footer content goes here -->
+    <p>&copy; 2023 Jedsio. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+  <script>
+    // JavaScript code for your website
+    // Modify and add your own scripts here
+
+    // Example script for interactive components
+    // Add your own interactive functionality here
+
+    // Example script for image gallery
+    // Add your own image gallery functionality here
+
+    // Example script for Three.js animations
+    const container = document.getElementById('animation-container');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(container.offsetWidth, container.offsetHeight);
+    container.appendChild(renderer.domElement);
+
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    camera.position.z = 5;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Example script for contact form
+    // Add your own contact form functionality here
+
+    // Animation for search bar
+    const searchButton = document.querySelector('.search-bar button');
+    const searchResults = document.querySelector('.search-bar .search-results');
+
+    searchButton.addEventListener('click', () => {
+      searchResults.style.display = 'block';
+    });
+
+    document.addEventListener('click', (event) => {
+      const isClickInside = searchButton.contains(event.target) || searchResults.contains(event.target);
+      if (!isClickInside) {
+        searchResults.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

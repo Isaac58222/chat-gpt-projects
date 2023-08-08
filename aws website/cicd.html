@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jedsio - CI/CD Pipeline</title>
+  <style>
+    /* Add your CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      background-color: #333;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
+    
+    h1 {
+      margin: 0;
+    }
+    
+    .container {
+      max-width: 960px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    
+    .pipeline-section {
+      margin-bottom: 50px;
+    }
+    
+    .pipeline-section h2 {
+      color: #333;
+    }
+    
+    .pipeline-step {
+      margin-bottom: 30px;
+    }
+    
+    .pipeline-step h3 {
+      color: #555;
+      margin-bottom: 10px;
+    }
+    
+    .pipeline-step p {
+      color: #777;
+    }
+    
+    .contact-section {
+      background-color: #f1f1f1;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    
+    .contact-form input[type="text"],
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    
+    .contact-form input[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .contact-form input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    
+    .success-message {
+      color: #4CAF50;
+      margin-top: 20px;
+    }
+    
+    .error-message {
+      color: #f44336;
+      margin-top: 20px;
+    }
+    
+    nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+    
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    nav ul li {
+      display: inline-block;
+      margin-right: 20px;
+    }
+    
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Jedsio - CI/CD Pipeline</h1>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <div class="container">
+    <div class="pipeline-section">
+      <h2>CI/CD Pipeline</h2>
+      
+      <div class="pipeline-step">
+        <h3>GitHub</h3>
+        <p>GitHub is a web-based hosting service for version control and collaboration using Git.</p>
+      </div>
+      
+      <div class="pipeline-step">
+        <h3>Jenkins</h3>
+        <p>Jenkins is an open-source automation server that orchestrates the CI/CD pipeline.</p>
+      </div>
+      
+      <div class="pipeline-step">
+        <h3>SonarQube</h3>
+        <p>SonarQube is a platform for continuous code quality inspection and static analysis.</p>
+      </div>
+      
+      <div class="pipeline-step">
+        <h3>Docker</h3>
+        <p>Docker is a containerization platform that enables easy deployment and scaling of applications.</p>
+      </div>
+      
+      <div class="pipeline-step">
+        <h3>End User</h3>
+        <p>The end user receives the deployed application, ensuring a seamless user experience.</p>
+      </div>
+    </div>
+    
+    <div class="contact-section">
+      <h2>Contact Us</h2>
+      
+      <div class="contact-form">
+        <form id="contactForm">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="text" name="email" placeholder="Your Email" required>
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <input type="submit" value="Send Message">
+        </form>
+        <div id="successMessage" class="success-message"></div>
+        <div id="errorMessage" class="error-message"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Add your JavaScript code here
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      
+      // Simulate form submission (replace with your actual logic)
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const message = formData.get('message');
+      
+      if (name && email && message) {
+        successMessage.textContent = 'Message sent successfully!';
+        errorMessage.textContent = '';
+        contactForm.reset();
+      } else {
+        successMessage.textContent = '';
+        errorMessage.textContent = 'Please fill out all the fields.';
+      }
+    });
+  </script>
+</body>
+</html>

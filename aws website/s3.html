@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jedsio</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background-color: #333333;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #333333;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #666666;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    #canvas {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Jedsio - Website made by ChatGPT</h1>
+    <p>This website and animation is made by Isaac with the help of ChatGPT</p>
+
+  </header>
+  <nav>
+    <!-- Navigation menu goes here -->
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="s3.html">three js</a></li>
+      
+    </ul>
+  </nav>
+  
+
+  
+  <div class="container">
+    <h2>Animation by three js</h2>
+    <p> May not support for some device</p>
+    
+    <div id="canvas"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // Three.js code for rendering 3D graphics
+    const canvas = document.getElementById('canvas');
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+    canvas.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  </script>
+  <footer>
+    <!-- Footer content goes here -->
+    <p>&copy; 2023 Jedsio.cloud All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

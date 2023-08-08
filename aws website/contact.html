@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jedsio - Contact</title>
+  <!-- Include your CSS file here -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <!-- Header content goes here -->
+    <h1>Jedsio - Website made by ChatGPT</h1>
+    <p>This website is made by Isaac with the help of ChatGPT</p>
+  </header>
+
+  <nav>
+    <!-- Navigation menu goes here -->
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="s3.html">ThreeJs Sample</a></li>
+
+      
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Contact content goes here -->
+    <section>
+      <h2>Contact Us</h2>
+      <p>For any inquiries or questions, please feel free to reach out to us:</p>
+      <ul>
+        <li>Email: <a href="mailto:myhardworkmysuccess@gmail.com">myhardworkmysuccess@gmail.com</a></li>
+        <li>Github: <a href="https://github.com/Isaac58222/isaac58222">https://github.com/Isaac58222</a></li>
+        <li>Linkedin: <a href="https://www.linkedin.com/in/isaac58222/">https://www.linkedin.com/in/isaac58222/</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <!-- Footer content goes here -->
+    <p>&copy; 2023 Jedsio.cloud All rights reserved.</p>
+  </footer>
+  <!-- Include your JavaScript and Three.js scripts here -->
+  <script src="script.js"></script>
+  
+  <script>
+    // Three.js code for rendering 3D graphics
+    const canvas = document.getElementById('canvas');
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+    canvas.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
