@@ -9,8 +9,9 @@ Visit the website: [https://awscloud.jedsio.cloud/](https://awscloud.jedsio.clou
 ## Hosting and Features
 
 - **Website URL:** [https://awscloud.jedsio.cloud/](https://awscloud.jedsio.cloud/)
-- **Hosting Platform:** AWS S3 website static hosting
-- **Domain Management:** Amazon Route 53
+- **Hosting Platform:** AWS S3 static website hosting
+- **Hosted Zone:** Amazon Route 53
+- **Domain Management:** Hostinger
 - **SSL Certificate:** Amazon Certificate Manager (ACM)
 - **Content Delivery Network (CDN):** Amazon CloudFront
 - **Static Files Storage:** Amazon S3
