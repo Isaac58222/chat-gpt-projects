@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isaac's Bird Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #e0f7ff;
+            margin: 0;
+            overflow: hidden;
+        }
+        #gameCanvas {
+            border: 2px solid #000;
+            display: none;
+        }
+        .start-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .score {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Isaac's Bird Game</h1>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <button class="start-btn">Start Game</button>
+    <div class="score">Score: 0</div>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const startBtn = document.querySelector(".start-btn");
+        const scoreDisplay = document.querySelector(".score");
+
+        // Load images
+        const birdImg = new Image();
+        birdImg.src = "https://i.postimg.cc/34H9yMt8/bird.png";
+        const pipeImg = new Image();
+        pipeImg.src = "https://i.postimg.cc/TKptFJy6/pipe.png";
+        const bgImg = new Image();
+        bgImg.src = "https://i.postimg.cc/qNS1T6nC/background.png";
+
+        // Bird properties
+        let bird = { x: 50, y: 150, width: 30, height: 30, velocity: 0, gravity: 0.3, lift: -6 };
+        let pipes = [];
+        let score = 0;
+        let isGameOver = false;
+        let frameCount = 0;
+
+        // Start the game
+        function startGame() {
+            canvas.style.display = "block";
+            startBtn.style.display = "none";
+            bird.y = 150;
+            bird.velocity = 0;
+            pipes = [];
+            score = 0;
+            isGameOver = false;
+            scoreDisplay.textContent = "Score: 0";
+            frameCount = 0;
+            requestAnimationFrame(updateGame);
+        }
+
+        // Update game frame
+        function updateGame() {
+            if (isGameOver) return;
+
+            // Clear and draw the background
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+
+            // Draw and update bird
+            drawBird();
+            handlePipes();
+            checkCollision();
+            updateScore();
+
+            // Apply gravity to bird
+            bird.velocity += bird.gravity;
+            bird.y += bird.velocity;
+
+            // Prevent bird from falling off the canvas
+            if (bird.y + bird.height >= canvas.height) {
+                bird.y = canvas.height - bird.height;
+                gameOver();
+            }
+
+            // Prevent bird from going above the canvas
+            if (bird.y < 0) {
+                bird.y = 0;
+            }
+
+            frameCount++;
+            requestAnimationFrame(updateGame);
+        }
+
+        // Draw the bird on the canvas
+        function drawBird() {
+            ctx.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+        }
+
+        // Handle pipes
+        function handlePipes() {
+            if (frameCount % 90 === 0) { // Create pipes every 90 frames
+                let pipeHeight = Math.floor(Math.random() * (canvas.height - 150)) + 50;
+                pipes.push({ x: canvas.width, y: pipeHeight });
+            }
+
+            pipes.forEach((pipe, index) => {
+                ctx.drawImage(pipeImg, pipe.x, 0, 50, pipe.y);
+                ctx.drawImage(pipeImg, pipe.x, pipe.y + 100, 50, canvas.height - pipe.y - 100);
+                pipe.x -= 2;
+
+                if (pipe.x + 50 < 0) {
+                    pipes.splice(index, 1);
+                }
+            });
+        }
+
+        // Check for collisions
+        function checkCollision() {
+            pipes.forEach((pipe) => {
+                if (
+                    bird.x < pipe.x + 50 &&
+                    bird.x + bird.width > pipe.x &&
+                    (bird.y < pipe.y || bird.y + bird.height > pipe.y + 100)
+                ) {
+                    gameOver();
+                }
+            });
+        }
+
+        // Update the score
+        function updateScore() {
+            pipes.forEach((pipe) => {
+                if (!pipe.passed && pipe.x + 50 < bird.x) {
+                    score += 1;
+                    pipe.passed = true;
+                    scoreDisplay.textContent = `Score: ${score}`;
+                }
+            });
+        }
+
+        // End the game
+        function gameOver() {
+            isGameOver = true;
+            alert(`Game Over! Your Score: ${score}`);
+            startBtn.style.display = "block";
+            canvas.style.display = "none";
+        }
+
+        // Make the bird fly
+        function flyUp() {
+            if (!isGameOver) {
+                bird.velocity = bird.lift; // Apply upward lift
+            }
+        }
+
+        // Event listeners
+        document.addEventListener("keydown", flyUp);
+        canvas.addEventListener("click", flyUp);
+        startBtn.addEventListener("click", startGame);
+    </script>
+</body>
+</html>
